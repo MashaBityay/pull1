@@ -24,18 +24,18 @@ public class Tests {
         yandexPage.logOut();
         a = 1;
     }
-    @Test
-    public void IncorrectLoginAndPassword() {
-        YandexPage yandexPage = PageFactory.initElements(Driver.getInstance().getDriver(), YandexPage.class);
-        yandexPage.openPage();
-        yandexPage.logInButtonClick();
-        //if (a==1)
-        yandexPage.choiseOtherAccount();
-        yandexPage.setLoginAndPassword("AutotestUser", "NoAutotestUser123");
-        yandexPage.verifyErrorPasswordMessage();
-        yandexPage.setLoginAndPassword( "NoAutotestUser", "AutotestUser123");
-        yandexPage.verifyErrorLoginMessage();
-    }
+   // @Test
+   // public void IncorrectLoginAndPassword() {
+    //    YandexPage yandexPage = PageFactory.initElements(Driver.getInstance().getDriver(), YandexPage.class);
+    //    yandexPage.openPage();
+    //    yandexPage.logInButtonClick();
+    //    //if (a==1)
+     //   yandexPage.choiseOtherAccount();
+      //  yandexPage.setLoginAndPassword("AutotestUser", "NoAutotestUser123");
+      //  yandexPage.verifyErrorPasswordMessage();
+      //  yandexPage.setLoginAndPassword( "NoAutotestUser", "AutotestUser123");
+       // yandexPage.verifyErrorLoginMessage();
+   // }
 
 
   //  @Test
