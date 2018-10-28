@@ -21,10 +21,15 @@ public class YandexPage {
     private WebElement loginButton;
     @FindBy(xpath = "//*[@class=\"mail-User-Name\"]")
     private WebElement user;
+
     @FindBy(xpath = "//*[@class=\"passport-Domik-Form-Error passport-Domik-Form-Error_active\"]")
     private WebElement errorMessage;
-    @FindBy(xpath = "//*[@id=\"nb-4\"]/div/div/div[7]")
+
+    @FindBy(xpath = "//*[@id=\"nb-4\"]/div/div/div[7]/a")
     private WebElement logOutButton;
+    @FindBy(xpath = "//*[@class='passport-Domik-Account-Item']")
+    private WebElement otherAccountButton;
+
     @FindBy(xpath = "//*[@data-id=\"video\"]")
     private WebElement videoButton;
     @FindBy(xpath = "//div[3]/div[1]/div[2]/div/div[1]/div[1]")
@@ -75,12 +80,17 @@ public class YandexPage {
     }
 
     public void setLoginAndPassword(String login, String password) {
-        Waits.afterClicable(loginField).click();
-        loginField.clear();
-        loginField.sendKeys(login);
-        passwordField.clear();
-        passwordField.sendKeys(password);
-        loginButton.click();
+            Waits.afterClicable(loginField).click();
+            loginField.clear();
+            loginField.sendKeys(login);
+            passwordField.clear();
+            passwordField.sendKeys(password);
+            loginButton.click();
+
+    }
+
+    public void choiseOtherAccount () {
+        Waits.afterClicable(otherAccountButton).click();
     }
 
     public void verifyUser() {
@@ -88,59 +98,72 @@ public class YandexPage {
         Assert.assertEquals(user.getText(), "AutotestUser");
     }
 
-    public void logOut() {
-        user.click();
-        new Waits().afterClicable(logOutButton).click();
+    public void logOut()  {
+           new Waits().afterPresent(logOutButton);
+            logOutButton.click();
         new Waits().afterClicable(mainlogInButton);
         Assert.assertTrue(mainlogInButton.isDisplayed());
     }
 
     public void verifyErrorPasswordMessage() {
+        boolean flag = false;
         new Waits().afterPresent(errorMessage);
         System.out.println(errorMessage.getText());
-        Assert.assertTrue(errorMessage.getText().equals("Неверный пароль"));
+        if(errorMessage.getText().equals("Неверный пароль"))
+            flag=true;
+        Assert.assertTrue(flag==true);
     }
 
     public void verifyErrorLoginMessage() {
+        boolean flag = false;
         new Waits().afterPresent(errorMessage);
         System.out.println(errorMessage.getText());
-        Assert.assertTrue(errorMessage.getText().equals("Такого аккаунта нет"));
+        if(errorMessage.getText().equals("Такого аккаунта нет"))
+            flag=true;
+        Assert.assertTrue(flag==true);
     }
 
     public void navigation() {
         new Waits().afterClicable(videoButton).click();
         new Waits().afterPresent(freshVideo);
-        Assert.assertTrue(freshVideo.getText().equals("Свежее видео"));
+       // Assert.assertTrue(freshVideo.getText().equals("Свежее видео"));
+        Assert.assertTrue(freshVideo.isDisplayed());
         driver.navigate().back();
 
         new Waits().afterClicable(picturesButton).click();
         new Waits().afterClicable(myCollections);
-        Assert.assertTrue(myCollections.getText().equals("Мои коллекции"));
+       // Assert.assertTrue(myCollections.getText().equals("Мои коллекции"));
+        Assert.assertTrue(myCollections.isDisplayed());
         driver.navigate().back();
 
         new Waits().afterClicable(newsButton).click();
         new Waits().afterPresent(newsLogo);
-        Assert.assertTrue(newsLogo.getAttribute("title").equals("Новости"));
+        //Assert.assertTrue(newsLogo.getAttribute("title").equals("Новости"));
+        Assert.assertTrue(newsLogo.isDisplayed());
         driver.navigate().back();
 
         new Waits().afterClicable(mapsButton).click();
         new Waits().afterPresent(searchPlace);
-        Assert.assertTrue(searchPlace.getAttribute("placeholder").equals("Поиск мест и адресов"));
+        //Assert.assertTrue(searchPlace.getAttribute("placeholder").equals("Поиск мест и адресов"));
+        Assert.assertTrue(searchPlace.isDisplayed());
         driver.navigate().back();
 
         new Waits().afterClicable(marketButton).click();
         new Waits().afterPresent(marketLogo);
-        Assert.assertTrue(marketLogo.getText().equals("Маркет"));
+        //Assert.assertTrue(marketLogo.getText().equals("Маркет"));
+        Assert.assertTrue(marketLogo.isDisplayed());
         driver.navigate().back();
 
         new Waits().afterClicable(tranclateButton).click();
         new Waits().afterPresent(tranclateLogo);
-        Assert.assertTrue(tranclateLogo.getText().equals("Переводчик"));
+       // Assert.assertTrue(tranclateLogo.getText().equals("Переводчик"));
+        Assert.assertTrue(tranclateLogo.isDisplayed());
         driver.navigate().back();
 
         new Waits().afterClicable(musicButton).click();
         new Waits().afterPresent(musicSearch);
-        Assert.assertTrue(musicSearch.getAttribute("placeholder").equals("Трек, альбом, исполнитель"));
+        //Assert.assertTrue(musicSearch.getAttribute("placeholder").equals("Трек, альбом, исполнитель"));
+        Assert.assertTrue(musicSearch.isDisplayed());
     }
 
     public void clickOnLanguage() {

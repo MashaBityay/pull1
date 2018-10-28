@@ -1,0 +1,4 @@
+pages\YandexPage.class
+selenium\Driver.class
+pageFactory\Google.class
+selenium\Waits.class
